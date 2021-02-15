@@ -123,6 +123,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+<<<<<<< HEAD
 --- !u!1001 &3303916
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -651,6 +652,9 @@ Transform:
   m_PrefabInstance: {fileID: 35946239}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &35946241 stripped
+=======
+--- !u!1 &999744732
+>>>>>>> parent of 90d283b... map
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1771197922807030, guid: f01f588f175525746b47b74897ee19ba, type: 3}
   m_PrefabInstance: {fileID: 35946239}
@@ -874,6 +878,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4315071183546906, guid: f01f588f175525746b47b74897ee19ba, type: 3}
   m_PrefabInstance: {fileID: 72845358}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
 --- !u!1 &72845360 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1771197922807030, guid: f01f588f175525746b47b74897ee19ba, type: 3}
@@ -12713,12 +12718,15 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+=======
+>>>>>>> parent of 90d283b... map
   m_GameObject: {fileID: 1339381142}
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+<<<<<<< HEAD
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1001 &1344968604
@@ -20517,3 +20525,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+=======
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+>>>>>>> parent of 90d283b... map
