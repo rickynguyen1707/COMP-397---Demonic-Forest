@@ -17,12 +17,15 @@ public class PlayerBehaviour : MonoBehaviour
     public Vector3 velocity;
     public bool isGrounded;
 
-    public AudioSource walkAudio;
+    public AudioClip walkAudio;
+    public AudioClip jumpAudio;
+    private AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame - once every 16.6666ms
@@ -53,9 +56,14 @@ public class PlayerBehaviour : MonoBehaviour
         controller.Move(velocity * Time.deltaTime);
 
         //Sound effect
-        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S))
+        if (isGrounded == true && move != new Vector3(0,0,0) && audioSource.isPlaying == false)
         {
-            walkAudio.Play();
+            audioSource.pitch = Random.Range(0.8f, 1.1f);
+            audioSource.PlayOneShot(walkAudio, 7f);
+        }
+        else if (isGrounded == false && audioSource.isPlaying == false)
+        {
+            audioSource.PlayOneShot(jumpAudio, 10f);
         }
     }
 
