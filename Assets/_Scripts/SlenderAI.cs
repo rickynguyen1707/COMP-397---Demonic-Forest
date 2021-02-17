@@ -7,7 +7,7 @@ public class SlenderAI : MonoBehaviour
 {
     public Transform player;
 
-    private float appearRadius = 10;
+    private float appearRadius = 30;
     private bool isCoroutineExecuting = false;
     private NavMeshAgent navMeshAgent;
     private Animator anim;
@@ -33,11 +33,6 @@ public class SlenderAI : MonoBehaviour
                 anim.SetBool("isRunning", false);
                 anim.SetBool("isAttacking", true);
             }
-        }
-        else
-        {
-            anim.SetBool("isRunning", false);
-            anim.SetBool("isAttacking", false);
         }
     }
 

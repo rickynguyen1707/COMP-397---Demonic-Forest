@@ -4,6 +4,23 @@ using UnityEngine;
 
 public class PlayerBehaviour : MonoBehaviour
 {
+    public InventoryObject inventory;
+
+    public void OnTriggerEnter(Collider other)
+    {
+        var item = other.GetComponent<Item>();
+        if (item)
+        {
+            inventory.AddItem(item.item, 1);
+            Destroy(other.gameObject);
+        }
+    }
+    private void OnApplicationQuit()
+    {
+        inventory.Container.Clear();
+    }
+
+    //
     public CharacterController controller;
 
     public float maxSpeed = 10.0f;
@@ -38,6 +55,8 @@ public class PlayerBehaviour : MonoBehaviour
         {
             velocity.y = -2.0f;
         }
+
+        
 
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");

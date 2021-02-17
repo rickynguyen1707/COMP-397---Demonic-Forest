@@ -27,7 +27,7 @@ public class CameraController : MonoBehaviour
         transform.localRotation = Quaternion.Euler(XRotation, 0.0f, 0.0f);
         playerBody.Rotate(Vector3.up * mouseX);
 
-        if (PauseMenu.GameIsPaused)
+        if (UIManager.GameIsPaused)
         {
             mouseSensitivity = 0f;
         }
