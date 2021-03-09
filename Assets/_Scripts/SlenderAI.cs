@@ -12,11 +12,15 @@ public class SlenderAI : MonoBehaviour
     private NavMeshAgent navMeshAgent;
     private Animator anim;
 
+    public PlayerBehaviour playerBehaviour;
+
     // Start is called before the first frame update
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
+
+        playerBehaviour = FindObjectOfType<PlayerBehaviour>();
     }
 
     // Update is called once per frame
@@ -28,10 +32,17 @@ public class SlenderAI : MonoBehaviour
         {
             navMeshAgent.SetDestination(player.position);
             anim.SetBool("isRunning", true);
+            
             if (Vector3.Distance(player.position, this.transform.position) < 5)
             {
                 anim.SetBool("isRunning", false);
                 anim.SetBool("isAttacking", true);
+
+                if(Time.frameCount % 120 == 0)
+                {
+                    DoDamage();
+                }
+                
             }
         }
     }
@@ -58,5 +69,10 @@ public class SlenderAI : MonoBehaviour
         /*Debug.Log("Started Coroutine at timestamp : " + Time.time);
         yield return new WaitForSeconds(5);
         Debug.Log("Finished Coroutine at timestamp : " + Time.time);*/
+    }
+
+    private void DoDamage()
+    {
+        playerBehaviour.TakeDamage(20);
     }
 }

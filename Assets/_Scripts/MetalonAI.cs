@@ -11,11 +11,15 @@ public class MetalonAI : MonoBehaviour
 
     private Animator anim;
 
+    public PlayerBehaviour playerBehaviour;
+
     // Start is called before the first frame update
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
+
+        playerBehaviour = FindObjectOfType<PlayerBehaviour>();
     }
 
     // Update is called once per frame
@@ -29,6 +33,11 @@ public class MetalonAI : MonoBehaviour
             {
                 anim.SetBool("Run Forward", false);
                 anim.SetBool("Smash Attack", true);
+
+                if (Time.frameCount % 240  == 0)
+                {
+                    DoDamage();
+                }
             }
         }
         else
@@ -40,6 +49,11 @@ public class MetalonAI : MonoBehaviour
             }
             
         }
-        
+
+    }
+
+    private void DoDamage()
+    {
+        playerBehaviour.TakeDamage(20);
     }
 }

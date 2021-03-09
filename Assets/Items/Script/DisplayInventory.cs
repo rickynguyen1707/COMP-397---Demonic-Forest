@@ -2,9 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class DisplayInventory : MonoBehaviour
 {
+    //up and down
+    //public GameObject controlPanel;
+
+    public RectTransform rectTransform;
+
+    public Vector2 offScreenPosition;
+    public Vector2 onScreenPosition;
+
+    [Range(0.1f, 10.0f)]
+    public float speed = 1.0f;
+    public float timer = 0.0f;
+    public bool isOnScreen = false;
+
+    //bag
+    public GameObject inventoryPrefab;
 
     public InventoryObject inventory;
     public int X_START;
@@ -18,12 +34,53 @@ public class DisplayInventory : MonoBehaviour
     void Start()
     {
         CreateDisplay();
+
+        rectTransform = GetComponent<RectTransform>();
+
+
+        rectTransform.anchoredPosition = offScreenPosition;
+
+        timer = 0.0f;
     }
 
     // Update is called once per frame
     void Update()
     {
         UpdateDisplay();
+
+        //up and down
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            isOnScreen = !isOnScreen;
+            timer = 0.0f;
+        }
+        if (isOnScreen)
+        {
+            MoveControlPanelDown();
+        }
+        else
+        {
+            MoveControlPanelUp();
+        }
+        
+    }
+
+    private void MoveControlPanelDown()
+    {
+        rectTransform.anchoredPosition = Vector2.Lerp(offScreenPosition, onScreenPosition, timer);
+        if (timer < 1.0f)
+        {
+            timer += Time.deltaTime * speed;
+        }
+    }
+
+    private void MoveControlPanelUp()
+    {
+        rectTransform.anchoredPosition = Vector2.Lerp(onScreenPosition, offScreenPosition, timer);
+        if (timer < 1.0f)
+        {
+            timer += Time.deltaTime * speed;
+        }
     }
 
     public void UpdateDisplay()

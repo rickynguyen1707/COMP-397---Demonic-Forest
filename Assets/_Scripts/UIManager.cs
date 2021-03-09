@@ -8,6 +8,8 @@ public class UIManager : MonoBehaviour
     public static bool GameIsPaused = false;
 
     public GameObject pauseMenuUI;
+    public GameObject player;
+    public HealthBarScreenSpaceController healthBar;
 
     // Update is called once per frame
     void Update()
@@ -38,6 +40,11 @@ public class UIManager : MonoBehaviour
         Time.timeScale = 0f;
         GameIsPaused = true;
         Cursor.lockState = CursorLockMode.None;
+    }
+
+    public void Save()
+    {
+        SaveSystem.SavePlayer(player, healthBar);
     }
 
     public void LoadMenu()

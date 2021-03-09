@@ -38,6 +38,9 @@ public class PlayerBehaviour : MonoBehaviour
     public AudioClip jumpAudio;
     private AudioSource audioSource;
 
+    public HealthBarScreenSpaceController healthBar;
+    public int health = 100;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -92,5 +95,15 @@ public class PlayerBehaviour : MonoBehaviour
         Gizmos.DrawWireSphere(groundCheck.position, groundRadius);
     }
 
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        healthBar.TakeDamage(damage);
+
+        if(health < 0)
+        {
+            health = 0;
+        }
+    }
 
 }
