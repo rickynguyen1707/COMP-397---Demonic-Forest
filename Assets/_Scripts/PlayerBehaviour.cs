@@ -23,6 +23,12 @@ public class PlayerBehaviour : MonoBehaviour
     //
     public CharacterController controller;
 
+    public Joystick joystick;
+    public float horizontalSensitivity;
+    public float verticalSensitivity;
+
+    public GameObject miniMap;
+
     public float maxSpeed = 10.0f;
     public float gravity = -30.0f;
     public float jumpHeight = 3.0f;
@@ -41,11 +47,58 @@ public class PlayerBehaviour : MonoBehaviour
     public HealthBarScreenSpaceController healthBar;
     public int health = 100;
 
+    [Header("Scene Data")]
+    public SceneDataSO sceneData1;
+    public SceneDataSO sceneData2;
+    public SceneDataSO sceneData3;
+    public SceneDataSO sceneData4;
+
     // Start is called before the first frame update
     void Start()
     {
         controller = GetComponent<CharacterController>();
         audioSource = GetComponent<AudioSource>();
+
+        //if (StaticClass.CrossSceneValue == 1)
+        //{
+        //    controller.enabled = false;
+        //    transform.position = sceneData1.playerPosition;
+        //    transform.rotation = sceneData1.playerRotation;
+        //    controller.enabled = true;
+
+        //    health = sceneData1.playerHealth;
+        //    healthBar.SetHealth(sceneData1.playerHealth);
+        //}
+        //else if (StaticClass.CrossSceneValue == 2)
+        //{
+        //    controller.enabled = false;
+        //    transform.position = sceneData2.playerPosition;
+        //    transform.rotation = sceneData2.playerRotation;
+        //    controller.enabled = true;
+
+        //    health = sceneData2.playerHealth;
+        //    healthBar.SetHealth(sceneData2.playerHealth);
+        //}
+        //else if (StaticClass.CrossSceneValue == 3)
+        //{
+        //    controller.enabled = false;
+        //    transform.position = sceneData3.playerPosition;
+        //    transform.rotation = sceneData3.playerRotation;
+        //    controller.enabled = true;
+
+        //    health = sceneData3.playerHealth;
+        //    healthBar.SetHealth(sceneData3.playerHealth);
+        //}
+        //else if (StaticClass.CrossSceneValue == 4)
+        //{
+        //    controller.enabled = false;
+        //    transform.position = sceneData4.playerPosition;
+        //    transform.rotation = sceneData4.playerRotation;
+        //    controller.enabled = true;
+
+        //    health = sceneData4.playerHealth;
+        //    healthBar.SetHealth(sceneData4.playerHealth);
+        //}
     }
 
     // Update is called once per frame - once every 16.6666ms
@@ -59,19 +112,21 @@ public class PlayerBehaviour : MonoBehaviour
             velocity.y = -2.0f;
         }
 
-        
+        // Input for WebGL and Desktop
+        //float x = Input.GetAxis("Horizontal");
+        //float z = Input.GetAxis("Vertical");
 
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
+        float x = joystick.Horizontal;
+        float z = joystick.Vertical;
 
         Vector3 move = transform.right * x + transform.forward * z;
 
         controller.Move(move * maxSpeed * Time.deltaTime);
 
-        if (Input.GetButton("Jump") && isGrounded)
-        {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2.0f * gravity);
-        }
+        //if (Input.GetButton("Jump") && isGrounded)
+        //{
+        //    velocity.y = Mathf.Sqrt(jumpHeight * -2.0f * gravity);
+        //}
 
         velocity.y += gravity * Time.deltaTime;
 
@@ -89,6 +144,17 @@ public class PlayerBehaviour : MonoBehaviour
         }
     }
 
+    void Jump()
+    {
+        velocity.y = Mathf.Sqrt(jumpHeight * -2.0f * gravity);
+    }
+
+    void ToggleMinimap()
+    {
+        // toggle the MiniMap on/off
+        miniMap.SetActive(!miniMap.activeInHierarchy);
+    }
+
     void OnDrawGizmos()
     {
         Gizmos.color = Color.white;
@@ -104,6 +170,19 @@ public class PlayerBehaviour : MonoBehaviour
         {
             health = 0;
         }
+    }
+
+    public void OnJumpButtonPressed()
+    {
+        if (isGrounded)
+        {
+            Jump();
+        }
+    }
+
+    public void OnMapButtonPressed()
+    {
+        ToggleMinimap();
     }
 
 }

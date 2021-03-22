@@ -49,11 +49,27 @@ public class DisplayInventory : MonoBehaviour
         UpdateDisplay();
 
         //up and down
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            isOnScreen = !isOnScreen;
-            timer = 0.0f;
-        }
+        //if (Input.GetKeyDown(KeyCode.Tab))
+        //{
+        //    isOnScreen = !isOnScreen;
+        //    timer = 0.0f;
+        //}
+        //if (isOnScreen)
+        //{
+        //    MoveControlPanelDown();
+        //}
+        //else
+        //{
+        //    MoveControlPanelUp();
+        //}
+        
+    }
+
+    void ToggleControlPanel()
+    {
+        isOnScreen = !isOnScreen;
+        timer = 0.0f;
+
         if (isOnScreen)
         {
             MoveControlPanelDown();
@@ -62,7 +78,6 @@ public class DisplayInventory : MonoBehaviour
         {
             MoveControlPanelUp();
         }
-        
     }
 
     private void MoveControlPanelDown()
@@ -81,6 +96,11 @@ public class DisplayInventory : MonoBehaviour
         {
             timer += Time.deltaTime * speed;
         }
+    }
+
+    public void OnControlButtonPressed()
+    {
+        ToggleControlPanel();
     }
 
     public void UpdateDisplay()

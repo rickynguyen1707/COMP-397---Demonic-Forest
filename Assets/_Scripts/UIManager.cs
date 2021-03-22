@@ -8,23 +8,45 @@ public class UIManager : MonoBehaviour
     public static bool GameIsPaused = false;
 
     public GameObject pauseMenuUI;
-    public GameObject player;
+
+    [Header("Player Settings")]
+    public PlayerBehaviour player;
     public HealthBarScreenSpaceController healthBar;
+
+    [Header("Scene Data")]
+    public SceneDataSO sceneData;
+
+    private void Start()
+    {
+        player = FindObjectOfType<PlayerBehaviour>();
+    }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        //if (Input.GetKeyDown(KeyCode.Escape))
+        //{       
+            //if (GameIsPaused)
+            //{
+            //    Resume();
+            //}
+            //else
+            //{
+            //    Pause();
+            //} 
+        //}       
+    }
+
+    void TogglePauseMenu()
+    {
+        if (GameIsPaused)
         {
-            if (GameIsPaused)
-            {
-                Resume();
-            }
-            else
-            {
-                Pause();
-            }
-        }    
+            Resume();
+        }
+        else
+        {
+            Pause();
+        }
     }
 
     public void Resume()
@@ -44,7 +66,20 @@ public class UIManager : MonoBehaviour
 
     public void Save()
     {
-        SaveSystem.SavePlayer(player, healthBar);
+        sceneData.playerPosition = player.transform.position;
+        sceneData.playerRotation = player.transform.rotation;
+        sceneData.playerHealth = player.health;
+    }
+
+    public void Load()
+    {
+        player.controller.enabled = false;
+        player.transform.position = sceneData.playerPosition;
+        player.transform.rotation = sceneData.playerRotation;
+        player.controller.enabled = true;
+
+        player.health = sceneData.playerHealth;
+        player.healthBar.SetHealth(sceneData.playerHealth);
     }
 
     public void LoadMenu()
@@ -54,7 +89,7 @@ public class UIManager : MonoBehaviour
     }
     public void ExitGame()
     {
-        SceneManager.LoadScene("End");
+        Application.Quit();
     }
 
     public void PlayAgain()
@@ -63,5 +98,10 @@ public class UIManager : MonoBehaviour
         SceneManager.LoadScene(activeScene.name);
         Time.timeScale = 1f;
         GameIsPaused = false;
+    }
+
+    public void OnPauseMenuButtonPressed()
+    {
+        TogglePauseMenu();
     }
 }

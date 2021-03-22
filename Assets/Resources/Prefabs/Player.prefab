@@ -146,7 +146,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c97d5bc746e4b264298b6059ab471d4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventory: {fileID: 0}
   controller: {fileID: 0}
+  joystick: {fileID: 0}
+  horizontalSensitivity: 0
+  verticalSensitivity: 0
+  miniMap: {fileID: 0}
   maxSpeed: 10
   gravity: -30
   jumpHeight: 2
@@ -157,6 +162,10 @@ MonoBehaviour:
     m_Bits: 8
   velocity: {x: 0, y: 0, z: 0}
   isGrounded: 0
+  walkAudio: {fileID: 0}
+  jumpAudio: {fileID: 0}
+  healthBar: {fileID: 0}
+  health: 100
 --- !u!1 &782156639157672749
 GameObject:
   m_ObjectHideFlags: 0
@@ -254,6 +263,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b406369527fbba42966199fef23327f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  joystick: {fileID: 0}
+  controlSensitivity: 2
   mouseSensitivity: 5
   playerBody: {fileID: 782156638991979344}
 --- !u!1 &782156639234929296
