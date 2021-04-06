@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
     public static bool GameIsPaused = false;
 
     public GameObject pauseMenuUI;
+    public GameObject inventoryUI;
 
     [Header("Player Settings")]
     public PlayerBehaviour player;
@@ -26,14 +27,14 @@ public class UIManager : MonoBehaviour
     {
         //if (Input.GetKeyDown(KeyCode.Escape))
         //{       
-            //if (GameIsPaused)
-            //{
-            //    Resume();
-            //}
-            //else
-            //{
-            //    Pause();
-            //} 
+        //if (GameIsPaused)
+        //{
+        //    Resume();
+        //}
+        //else
+        //{
+        //    Pause();
+        //} 
         //}       
     }
 
@@ -104,4 +105,9 @@ public class UIManager : MonoBehaviour
     {
         TogglePauseMenu();
     }
-}
+
+    public void ToggleInventoryUI()
+    {
+        inventoryUI.SetActive(!inventoryUI.activeInHierarchy);
+    }
+}        
