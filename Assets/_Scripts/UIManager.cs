@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
 
     public GameObject pauseMenuUI;
     public GameObject inventoryUI;
+    public GameObject gameOverUI;
 
     [Header("Player Settings")]
     public PlayerBehaviour player;
@@ -35,7 +36,11 @@ public class UIManager : MonoBehaviour
         //{
         //    Pause();
         //} 
-        //}       
+        //}     
+        if (player.health <= 0)
+        {
+            gameOverUI.SetActive(true);
+        }
     }
 
     void TogglePauseMenu()

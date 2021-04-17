@@ -53,6 +53,9 @@ public class PlayerBehaviour : MonoBehaviour
     public SceneDataSO sceneData3;
     public SceneDataSO sceneData4;
 
+    public Quest quest;
+    public QuestGiver questGiver;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -142,6 +145,8 @@ public class PlayerBehaviour : MonoBehaviour
         {
             audioSource.PlayOneShot(jumpAudio, 10f);
         }
+
+        Questing();
     }
 
     void Jump()
@@ -185,4 +190,17 @@ public class PlayerBehaviour : MonoBehaviour
         ToggleMinimap();
     }
 
+    public void Questing()
+    {
+        if (quest.isActive)
+        {
+            
+            if (quest.goal.IsReached())
+            {
+                Inventory.instance.Add(quest.reward);
+                questGiver.UpdateQuestList();
+                quest.Complete();
+            }
+        }
+    }
 }
